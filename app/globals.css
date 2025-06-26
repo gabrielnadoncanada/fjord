@@ -1,26 +1,253 @@
 @import "tailwindcss";
+@import "tw-animate-css";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+@custom-variant dark (&:is(.dark *));
 
 @theme inline {
+  /* Core design system colors */
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted-2: var(--muted-2);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-destructive: var(--destructive);
+
+  /* Figma-specific colors */
+  --color-overlay: var(--overlay);
+  --color-overlay-light: var(--overlay-light);
+  --color-overlay-border: var(--overlay-border);
+  --color-dark-surface: var(--dark-surface);
+  --color-brand-teal: var(--brand-teal);
+  --color-brand-gray: var(--brand-gray);
+  --color-brand-muted: var(--brand-muted);
+
+  /* Typography - Figma uses DM Sans */
+  --font-sans: "DM Sans", var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+
+  /* Figma font sizes and line heights */
+  --text-xs: 12px;
+  --text-sm: 14px; /* small */
+  --text-base: 16px; /* h6 */
+  --text-lg: 18px; /* h5 */
+  --text-xl: 24px; /* h4 */
+  --text-2xl: 28px; /* h3 */
+  --text-3xl: 32px; /* h2 */
+  --text-4xl: 40px; /* h1 */
+
+  --text-default: 15px;
+  --text-default-line-height: 1.6em;
+
+  --text-nav: 14px;
+  --text-nav-line-height: 1.3em;
+
+  --text-navbar: 14px;
+  --text-navbar-line-height: 1em;
+
+  --text-sm--line-height: 1.6em;
+  --text-base--line-height: 1.2em;
+  --text-lg--line-height: 1.3em;
+  --text-xl--line-height: 1.3em;
+  --text-2xl--line-height: 1.3em;
+  --text-3xl--line-height: 1.2em;
+  --text-4xl--line-height: 1.2em;
+
+  --leading-tight: 1em;
+  --leading-snug: 1.2em;
+  --leading-normal: 1.3em;
+  --leading-relaxed: 1.6em;
+
+  --heading-font-family: var(--font-sans);
+  --heading-font-weight: 400;
+  --heading-color: var(--foreground);
+
+  /* Border radius from Figma */
+  --radius-xs: 4px;
+  --radius-sm: 6px;
+  --radius-md: 8px;
+  --radius-lg: 10px;
+  --radius-xl: 12px;
+  --radius-2xl: 20px;
+
+  /* Chart colors */
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+
+  /* Sidebar colors */
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+:root {
+  --radius: 0.625rem;
+
+  /* Figma Design System Colors */
+  --background: #ffffff; /* fill_VQRNLS */
+  --foreground: #0e1011; /* fill_F7UPC8 */
+  --card: #ffffff;
+  --card-foreground: #0e1011;
+  --popover: #ffffff;
+  --popover-foreground: #0e1011;
+  --primary: #0e1011; /* fill_F7UPC8 - main dark color */
+  --primary-foreground: #ffffff; /* fill_VQRNLS - white text on dark */
+  --secondary: #f6f6f6; /* fill_5DV6IB - light gray */
+  --secondary-foreground: #0e1011;
+  --muted: #f6f6f6; /* fill_5DV6IB - light gray background */
+  --muted-foreground: rgba(
+    14,
+    16,
+    17,
+    0.6
+  ); /* fill_EU66ZS - 60% opacity foreground */
+  --muted-2: #ececec; /* fill_FKJXUQ - medium gray */
+  --accent: #f6f6f6;
+  --accent-foreground: #0e1011;
+  --destructive: oklch(0.577 0.245 27.325);
+  --border: #ececec;
+  --input: #ececec;
+  --ring: oklch(0.708 0 0);
+
+  /* Additional Figma Colors */
+  --overlay: rgba(0, 0, 0, 0.3); /* fill_Y287Q5 - overlay/backdrop */
+  --overlay-light: rgba(
+    255,
+    255,
+    255,
+    0.6
+  ); /* fill_KCVF48 - light overlay text */
+  --overlay-border: rgba(255, 255, 255, 0.1); /* stroke_RD2EDX - light border */
+  --dark-surface: #1f2122; /* fill_6864NT - dark input background */
+
+  /* Brand Colors */
+  --brand-teal: #0c7565; /* fill_AV4B7V - teal brand color */
+  --brand-gray: #939598; /* fill_FSZ7QU - brand gray */
+  --brand-muted: #8d8e8d; /* fill_92N2UT - muted brand color */
+
+  /* Chart colors remain the same */
+  --chart-1: oklch(0.646 0.222 41.116);
+  --chart-2: oklch(0.6 0.118 184.704);
+  --chart-3: oklch(0.398 0.07 227.392);
+  --chart-4: oklch(0.828 0.189 84.429);
+  --chart-5: oklch(0.769 0.188 70.08);
+
+  /* Sidebar colors */
+  --sidebar: #ffffff;
+  --sidebar-foreground: #0e1011;
+  --sidebar-primary: #0e1011;
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: #f6f6f6;
+  --sidebar-accent-foreground: #0e1011;
+  --sidebar-border: #ececec;
+  --sidebar-ring: oklch(0.708 0 0);
+}
+
+.dark {
+  /* Dark mode - inverted from Figma design */
+  --background: #0e1011; /* Dark background */
+  --foreground: #ffffff; /* Light text */
+  --card: #1f2122; /* Darker surface */
+  --card-foreground: #ffffff;
+  --popover: #1f2122;
+  --popover-foreground: #ffffff;
+  --primary: #ffffff; /* Light primary in dark mode */
+  --primary-foreground: #0e1011; /* Dark text on light primary */
+  --secondary: #2a2b2c; /* Darker secondary */
+  --secondary-foreground: #ffffff;
+  --muted: #2a2b2c; /* Darker muted */
+  --muted-foreground: rgba(255, 255, 255, 0.6); /* Light muted text */
+  --muted-2: #3a3b3c; /* Slightly lighter muted */
+  --accent: #2a2b2c;
+  --accent-foreground: #ffffff;
+  --destructive: oklch(0.704 0.191 22.216);
+  --border: rgba(255, 255, 255, 0.1); /* Light border */
+  --input: rgba(255, 255, 255, 0.15); /* Light input border */
+  --ring: oklch(0.556 0 0);
+
+  /* Additional dark mode colors */
+  --overlay: rgba(0, 0, 0, 0.5); /* Darker overlay */
+  --overlay-light: rgba(255, 255, 255, 0.8); /* Brighter overlay text */
+  --overlay-border: rgba(255, 255, 255, 0.2); /* Brighter border */
+  --dark-surface: #2a2b2c; /* Dark surface */
+
+  /* Brand colors remain consistent */
+  --brand-teal: #0c7565;
+  --brand-gray: #939598;
+  --brand-muted: #8d8e8d;
+
+  /* Chart colors for dark mode */
+  --chart-1: oklch(0.488 0.243 264.376);
+  --chart-2: oklch(0.696 0.17 162.48);
+  --chart-3: oklch(0.769 0.188 70.08);
+  --chart-4: oklch(0.627 0.265 303.9);
+  --chart-5: oklch(0.645 0.246 16.439);
+
+  /* Sidebar dark mode */
+  --sidebar: #1f2122;
+  --sidebar-foreground: #ffffff;
+  --sidebar-primary: #ffffff;
+  --sidebar-primary-foreground: #0e1011;
+  --sidebar-accent: #2a2b2c;
+  --sidebar-accent-foreground: #ffffff;
+  --sidebar-border: rgba(255, 255, 255, 0.1);
+  --sidebar-ring: oklch(0.556 0 0);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@utility text-nav {
+  font-size: var(--text-nav);
+  line-height: var(--text-nav-line-height);
+}
+
+@utility text-navbar {
+  font-size: var(--text-navbar);
+  line-height: var(--text-navbar-line-height);
+}
+
+@utility text-default {
+  font-size: var(--text-default);
+  line-height: var(--text-default-line-height);
+}
+
+/* Infinite scroll animation */
+@keyframes scroll-left {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
+@utility animate-scroll-left {
+  animation: scroll-left 20s linear infinite;
 }
