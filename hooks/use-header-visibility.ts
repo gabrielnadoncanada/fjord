@@ -1,9 +1,14 @@
 import { useEffect, useState, useRef } from "react";
 
-export function useHeaderVisibility() {
+export function useHeaderVisibility(pathname: string) {
   const [headerRef, setHeaderRef] = useState<HTMLElement | null>(null);
+  const isHomePage = pathname === "/";
 
   useEffect(() => {
+    if (!isHomePage) {
+      return;
+    }
+
     const handleScroll = () => {
       const y = Math.min(window.scrollY, 12);
       if (headerRef) {
@@ -16,7 +21,7 @@ export function useHeaderVisibility() {
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
-  }, [headerRef]);
+  }, [headerRef, isHomePage]);
 
   return { setHeaderRef };
 }

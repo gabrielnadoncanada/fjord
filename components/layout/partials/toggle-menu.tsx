@@ -2,17 +2,22 @@
 
 import { useState } from "react";
 
-export default function ToggleMenu({ className }: { className?: string }) {
+export default function ToggleMenu({
+  className,
+  handleToggle,
+}: {
+  className?: string;
+  handleToggle: () => void;
+}) {
   const [isToggled, setIsToggled] = useState(false);
-
-  const handleToggle = () => {
-    setIsToggled(!isToggled);
-  };
 
   return (
     <div
       className={`justify-center items-center w-10 h-10 flex p-0 rounded-[8px] bg-foreground cursor-pointer ${className}`}
-      onClick={handleToggle}
+      onClick={() => {
+        setIsToggled(!isToggled);
+        handleToggle();
+      }}
     >
       <div className="w-4 h-[10px] relative rounded-lg">
         <div

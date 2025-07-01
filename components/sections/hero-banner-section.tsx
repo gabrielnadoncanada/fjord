@@ -7,33 +7,39 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel";
-import { Button } from "./ui/button";
+import { Button } from "../ui/button";
+import Link from "next/link";
 
-// Sample data for multiple slides - you can replace this with your actual data
 const heroSlides = [
   {
     id: 1,
-    image: "/images/hero-banner-bg.jpg",
-    title: "Crafting Comfort,\nInspired by the North",
+    image: "/images/about-image-1.jpg",
+    imageAlt: "Hero banner",
+    title: "Construction\n Résidentielle",
     description:
-      "Discover timeless Scandinavian furniture, meticulously handcrafted to bring warmth and elegance into your home.",
-    buttonText: "Shop Now",
+      "Rénovations complètes de maisons, rallonges, rénovations de cuisines et salles de bain, et plus encore.",
+    buttonText: "En savoir plus",
+    buttonLink: "/shop",
   },
   {
     id: 2,
-    image: "/images/hero-banner-bg.jpg", // You can add more images here
+    image: "/images/commercial-build-out.webp",
+    imageAlt: "Hero banner",
     title: "Modern Design,\nTimeless Appeal",
     description:
       "Experience the perfect blend of contemporary aesthetics and traditional craftsmanship in every piece.",
     buttonText: "Explore Collection",
+    buttonLink: "/shop",
   },
   {
     id: 3,
-    image: "/images/hero-banner-bg.jpg", // You can add more images here
+    image: "/images/hero-banner-bg.jpg",
+    imageAlt: "Hero banner",
     title: "Sustainable Living,\nBeautiful Spaces",
     description:
       "Choose furniture that not only looks great but also supports sustainable and ethical manufacturing practices.",
     buttonText: "Learn More",
+    buttonLink: "/shop",
   },
 ];
 
@@ -44,18 +50,16 @@ export default function HeroBannerSection() {
         {heroSlides.map((slide) => (
           <CarouselItem key={slide.id}>
             <div className="relative w-full h-[calc(100vh-24px)] rounded-xl overflow-hidden bg-gray-200">
-              {/* Background Image */}
               <div className="absolute inset-0">
                 <Image
                   src={slide.image}
-                  alt="Hero banner"
+                  alt={slide.imageAlt}
                   fill
                   className="object-cover"
                   priority
                 />
               </div>
 
-              {/* Content Card */}
               <div className="absolute bottom-5 md:bottom-10 max-md:right-5 left-5 md:left-10">
                 <Card className="w-full md:w-[400px] bg-white rounded-[10px] border-0 shadow-lg py-0">
                   <CardContent className="p-8 md:p-10 space-y-8">
@@ -68,10 +72,11 @@ export default function HeroBannerSection() {
                       </p>
                     </div>
 
-                    {/* Shop Now Button */}
-                    <Button variant="text-default" className="mr-auto">
-                      {slide.buttonText}
-                    </Button>
+                    <Link href={slide.buttonLink}>
+                      <Button variant="text-default" className="mr-auto">
+                        {slide.buttonText}
+                      </Button>
+                    </Link>
                   </CardContent>
                 </Card>
               </div>
@@ -80,7 +85,6 @@ export default function HeroBannerSection() {
         ))}
       </CarouselContent>
 
-      {/* Custom styled navigation arrows to match Figma design */}
       <CarouselPrevious className="absolute top-1/2 left-5 md:left-10 transform -translate-y-1/2 w-10 h-10 bg-black/30 border-0 rounded backdrop-blur-sm cursor-pointer hover:!bg-white text-white transition-colors">
         <Image
           src="/icons/arrow-left.svg"

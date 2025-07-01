@@ -1,6 +1,6 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { SectionHeader } from "@/components/ui/section-header";
+import { SectionHeader } from "@/components/sections/partials/section-header";
 import Image from "next/image";
 
 interface Collection {
@@ -64,12 +64,9 @@ const collections: Collection[] = [
 export default function CollectionsSection() {
   return (
     <section className="w-full">
-      {/* Header */}
       <SectionHeader title="Collections" />
 
-      {/* Collections Grid */}
       <div className="flex flex-col md:flex-row gap-3">
-        {/* Wood Collection - Large */}
         <div className="flex-1 flex aspect-square">
           <div className="relative flex-1 bg-muted-2 rounded-xl overflow-hidden">
             {collections[0].image && (
@@ -102,9 +99,7 @@ export default function CollectionsSection() {
           </div>
         </div>
 
-        {/* Dark and Modern Collections */}
         <div className="flex-1 space-y-3 flex flex-col">
-          {/* Dark Collection */}
           <div className="flex flex-wrap  gap-3 flex-1 ">
             <div className="flex-[4_0_250px] max-w-full bg-muted-2 rounded-xl overflow-hidden relative">
               {collections[1].images?.[1] && (
@@ -138,8 +133,7 @@ export default function CollectionsSection() {
             </Card>
           </div>
 
-          {/* Modern Collection */}
-          <div className="flex  max-[500px]:flex-col-reverse flex-wrap gap-3 flex-1 ">
+          <div className="flex  max-[500px]:flex-col-reverse md:max-lg:flex-col-reverse flex-wrap gap-3 flex-1 ">
             <Card
               className={`flex-[1_0_200px] ${collections[2].bgColor} border-0 shadow-sm`}
             >
